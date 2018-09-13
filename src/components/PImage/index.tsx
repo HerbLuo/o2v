@@ -16,11 +16,12 @@ class PImage extends React.Component<Props, State> {
     static Fetching = Symbol('fetching');
     static DefaultLoadingAnimation = <span>加载中</span>;
 
+    state: State = {
+        src: PImage.Fetching
+    };
+
     constructor(props: Props) {
         super(props);
-        this.state = {
-            src: PImage.Fetching
-        };
         this.fetchDetail().catch(console.error)
     }
 
@@ -53,7 +54,6 @@ class PImage extends React.Component<Props, State> {
     }
 }
 
-export default PImage
 export {
     PImage
 }

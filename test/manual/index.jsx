@@ -3,8 +3,8 @@ import React from 'react'
 import ReactDom from 'react-dom'
 /** @type Array */
 import componentNames from './components.json'
-import { PTextManuallyTest } from '../../src/components/PText/_test/manual.jsx'
-import { PImageManuallyTest } from '../../src/components/PImage/_test/manual.jsx'
+import { PLayout } from '@lib'
+import { delay } from '../../src/utils/delay4test'
 
 class Content extends React.Component {
   _getPageNameFromLocation = () => location.pathname.substring(1)
@@ -43,13 +43,27 @@ class Content extends React.Component {
   }
 
   renderContentRouter () {
-    const router = {
-      '': PImageManuallyTest,
-      PImage: PImageManuallyTest,
-      PText: PTextManuallyTest
-    }
-    const component = router[this.state.pageName] || PImageManuallyTest
-    return React.createElement(component)
+    // const router = {
+    //   '': PImageTest,
+    //   PImage: PImageTest,
+    //   PText: PTextTest
+    // }
+    // const component = router[this.state.pageName] || PImageTest
+    return <PLayout>
+      123456
+      <PLayout p={delay(2000).then(() => 'async data')}>
+        {({resolved}) => (
+          <div>{resolved}</div>
+        )}
+      </PLayout>
+    </PLayout>
+  }
+}
+
+class PromiseLayout extends React.Component {
+  state = {}
+  render () {
+
   }
 }
 

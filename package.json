@@ -12,7 +12,7 @@
   ],
   "scripts": {
     "dist": "SET NODE_ENV=production&& rollup -c ./rollup.config.js",
-    "dist:dev": "rollup -c ./rollup.config.js",
+    "dist:dev": "rollup -w -c ./rollup.config.js",
     "test:manual": "node test/manual/index.node.js",
     "test:manual:webpack": "webpack-dev-server --progress --open --config test/manual/test.webpack.babel.js",
     "publish2npm": "npm run test && npm run dist && npm publish --access=public"
@@ -25,6 +25,7 @@
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.0.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.0.0",

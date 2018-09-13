@@ -14,7 +14,7 @@ interface State {
     value: CouldRenderTypes
 }
 
-class PText extends React.Component<Props, State> {
+export class PText extends React.Component<Props, State> {
     static Fetching = Symbol('fetching');
     static DefaultLoadingAnimation = <span>加载中</span>;
 
@@ -88,9 +88,4 @@ export class PTextAnimationOneTwoThree extends React
     componentWillUnmount() {
         this.areUnMount = true
     }
-}
-
-export default PText
-export {
-    PText
 }

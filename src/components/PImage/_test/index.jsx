@@ -4,7 +4,7 @@ import Image from './image.png'
 
 const delay = time => new Promise(resolve => setTimeout(resolve, time))
 
-export class PImageManuallyTest extends React.Component {
+export class PImageTest extends React.Component {
   render () {
     return <div className="test-box">
       <div>

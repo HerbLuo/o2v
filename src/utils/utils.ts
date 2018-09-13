@@ -40,3 +40,7 @@ export function isUndefined(obj: any): boolean {
 export function isEs6Class(obj: any): boolean {
     return obj && isFunction(obj.toString) && obj.toString().startsWith('class');
 }
+
+export function isPromise(obj: any): obj is Promise<any> {
+    return obj instanceof Promise
+}

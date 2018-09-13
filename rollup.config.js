@@ -17,7 +17,7 @@ export default {
     },
   ],
   watch: {
-    include: 'src/**',
+    include: ['index.ts', 'src/**'],
     exclude: 'node_modules/**'
   },
   plugins: [
