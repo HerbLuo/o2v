@@ -1,4 +1,5 @@
 import './styles.less'
+import '@lib/o2v.css'
 import React from 'react'
 import ReactDom from 'react-dom'
 /** @type Array */

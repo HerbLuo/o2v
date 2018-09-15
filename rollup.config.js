@@ -1,10 +1,10 @@
-import rollupTypescript from 'rollup-plugin-typescript'
 import typescript from 'typescript'
+import less from 'rollup-plugin-less'
 import replace from 'rollup-plugin-replace'
+import rollupTypescript from 'rollup-plugin-typescript'
 
 export default {
   input: 'index.ts',
-
   output: [
     {
       format: 'cjs',
@@ -23,6 +23,9 @@ export default {
   plugins: [
     rollupTypescript({
       typescript
+    }),
+    less({
+      output: 'lib/o2v.css'
     }),
     replace({
       exclude: 'node_modules/**',
