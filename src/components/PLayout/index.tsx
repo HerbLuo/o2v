@@ -1,5 +1,6 @@
 import * as React from 'react'
 import {isPromise} from "../../utils/utils";
+import './styles.less'
 
 type AllowedValueTypes = any
 
