@@ -1,3 +1,4 @@
+/* eslint-disable */
 import path from 'path'
 import webpack from 'webpack'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
@@ -13,13 +14,13 @@ export default {
     publicPath: '/',
   },
   module: {
-    rules: [/*{
+    rules: [{
       test: /.jsx?$/,
       use: 'eslint-loader',
       enforce: 'pre',
-      include: [/_test/], // 指定检查的目录
+      include: [/test/, /src/], // 指定检查的目录
       exclude: [/node_modules/]
-    }, */{
+    }, {
       test: /.jsx?$/,
       use: ['babel-loader'],
       exclude: /node_modules/

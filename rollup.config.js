@@ -2,6 +2,9 @@ import typescript from 'typescript'
 import less from 'rollup-plugin-less'
 import replace from 'rollup-plugin-replace'
 import rollupTypescript from 'rollup-plugin-typescript'
+import fse from 'fs-extra'
+
+fse.ensureDirSync('lib')
 
 export default {
   input: 'index.ts',

@@ -1,3 +1,4 @@
+/* eslint-disable */
 // 不要将此文件混合到 webpack的配置中，会导致 WebStorm的解析卡顿
 const fs = require('fs')
 const path = require('path')
