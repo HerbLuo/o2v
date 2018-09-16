@@ -1,10 +1,9 @@
 import React from 'react'
 import { PImage } from '@lib'
 import Image from './image.png'
+import { delay } from '../../../utils/delay4test'
 
-const delay = time => new Promise(resolve => setTimeout(resolve, time))
-
-export class PImageTest extends React.Component {
+export default class PImageTest extends React.Component {
   render () {
     return <div className="test-box">
       <div>

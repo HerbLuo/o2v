@@ -5,13 +5,12 @@ import ReactDom from 'react-dom'
 /** @type Array */
 import componentNames from './components.json'
 import { PLayout } from '@lib'
-import { delay } from '../../src/utils/delay4test'
 
 class Content extends React.Component {
   _getPageNameFromLocation = () => location.pathname.substring(1)
 
   state = {
-    pageName: this._getPageNameFromLocation()
+    pageName: this._getPageNameFromLocation() || 'PImage'
   }
 
   setPageNameStateFromLocation = () => {
@@ -44,27 +43,14 @@ class Content extends React.Component {
   }
 
   renderContentRouter () {
-    // const router = {
-    //   '': PImageTest,
-    //   PImage: PImageTest,
-    //   PText: PTextTest
-    // }
     // const component = router[this.state.pageName] || PImageTest
+    const componentName = this.state.pageName
+    const module = import(`../../src/components/${componentName}/_test/index.jsx`)
+      .then(m => m.default)
+
     return <PLayout>
-      123456
-      <PLayout p={delay(2000).then(() => 'async data')}>
-        {({resolved}) => (
-          <div>{resolved}</div>
-        )}
-      </PLayout>
+      <PLayout p={module} onResolve={Test => <Test />}/>
     </PLayout>
-  }
-}
-
-class PromiseLayout extends React.Component {
-  state = {}
-  render () {
-
   }
 }
 

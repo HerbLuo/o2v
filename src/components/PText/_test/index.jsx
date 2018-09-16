@@ -1,9 +1,8 @@
 import React from 'react'
 import { PText } from '@lib/index.esm'
+import { delay } from '../../../utils/delay4test'
 
-const delay = time => new Promise(resolve => setTimeout(resolve, time))
-
-export class PTextTest extends React.Component {
+export default class PTextTest extends React.Component {
   render () {
     return <div style={{display: 'flex', flexDirection: 'column'}}>
       <PText>立即加载的文字</PText>

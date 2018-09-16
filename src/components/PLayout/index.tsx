@@ -20,18 +20,21 @@ interface State<T> {
 
 export class PLayout<T extends AllowedValueTypes>
     extends React.Component<PLayoutProps<T>, State<T>> {
-    state: State<T> = {
-        resolved: false,
-        rejected: false,
-        pending: true
-    };
+    state: State<T>;
 
     constructor(props: PLayoutProps<T>) {
         super(props);
+        this.state = {
+            resolved: false,
+            rejected: false,
+            pending: true
+        };
+
         if (isPromise(props.p)) {
             props.p.then(this.resolve).catch(this.reject);
         } else {
-            this.resolve(props.p)
+            this.state.resolved = props.p;
+            this.state.pending = false;
         }
     }
 
@@ -57,7 +60,7 @@ export class PLayout<T extends AllowedValueTypes>
 
         let content: React.ReactElement<any> | null;
         if (children) {
-            content = children(this.state)
+            content = children(this.state);
         } else {
             if (resolved !== false && onResolve) {
                 content = onResolve(resolved)
