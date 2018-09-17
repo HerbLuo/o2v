@@ -10,6 +10,7 @@ export interface PLayoutProps<T> {
     onReject?: (reason: any) => React.ReactElement<any>;
     onPending?: () => React.ReactElement<any>;
     children?: (state: Pick<State<T>, "resolved">) => React.ReactElement<any>;
+    [key: string]: any;
 }
 
 interface State<T> {
@@ -19,24 +20,12 @@ interface State<T> {
 }
 
 export class PLayout<T extends AllowedValueTypes>
-    extends React.Component<PLayoutProps<T>, State<T>> {
-    state: State<T>;
-
-    constructor(props: PLayoutProps<T>) {
-        super(props);
-        this.state = {
-            resolved: false,
-            rejected: false,
-            pending: true
-        };
-
-        if (isPromise(props.p)) {
-            props.p.then(this.resolve).catch(this.reject);
-        } else {
-            this.state.resolved = props.p;
-            this.state.pending = false;
-        }
-    }
+    extends React.PureComponent<PLayoutProps<T>, State<T>> {
+    state: State<T> = {
+        resolved: false,
+        rejected: false,
+        pending: true
+    };
 
     resolve = (value: T) =>
         this.setState({
@@ -75,8 +64,21 @@ export class PLayout<T extends AllowedValueTypes>
         return content
     }
 
+    props2state() {
+        if (isPromise(this.props.p)) {
+            // props.p.then(console.log);
+            this.props.p.then(this.resolve).catch(this.reject);
+        } else {
+            this.state.resolved = this.props.p;
+            this.state.pending = false;
+        }
+    }
+
     render() {
-        return <div className="o2v-layout">
+        const { children, className, ...others } = this.props;
+        this.props2state();
+
+        return <div className={`o2v-layout ${className || ''}`} {...others}>
             {this.asLayout()
                 ? this.props.children
                 : this.getContentByPromise()}

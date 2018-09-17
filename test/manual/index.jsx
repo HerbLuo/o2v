@@ -49,7 +49,7 @@ class Content extends React.Component {
       .then(m => m.default)
 
     return <PLayout>
-      <PLayout p={module} onResolve={Test => <Test />}/>
+      <PLayout className="test-layout" p={module} onResolve={Test => <Test />} />
     </PLayout>
   }
 }
