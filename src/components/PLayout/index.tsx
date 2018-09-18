@@ -9,7 +9,7 @@ export interface PLayoutProps<T> {
     onResolve?: (value: T) => React.ReactElement<any>;
     onReject?: (reason: any) => React.ReactElement<any>;
     onPending?: () => React.ReactElement<any>;
-    children?: (state: Pick<State<T>, "resolved">) => React.ReactElement<any>;
+    children?: React.ReactElement<any>;
     [key: string]: any;
 }
 
@@ -45,28 +45,23 @@ export class PLayout<T extends AllowedValueTypes>
 
     getContentByPromise(): React.ReactElement<any> | null {
         const {resolved, rejected, pending} = this.state;
-        const {children, onResolve, onPending, onReject} = this.props;
+        const {onResolve, onPending, onReject} = this.props;
 
         let content: React.ReactElement<any> | null;
-        if (children) {
-            content = children(this.state);
+        if (resolved !== false && onResolve) {
+            content = onResolve(resolved)
+        } else if (rejected !== false && onReject) {
+            content = onReject(rejected)
+        } else if (pending !== false && onPending) {
+            content = onPending()
         } else {
-            if (resolved !== false && onResolve) {
-                content = onResolve(resolved)
-            } else if (rejected !== false && onReject) {
-                content = onReject(rejected)
-            } else if (pending !== false && onPending) {
-                content = onPending()
-            } else {
-                content = null
-            }
+            content = null
         }
         return content
     }
 
     props2state() {
         if (isPromise(this.props.p)) {
-            // props.p.then(console.log);
             this.props.p.then(this.resolve).catch(this.reject);
         } else {
             this.state.resolved = this.props.p;
@@ -75,7 +70,11 @@ export class PLayout<T extends AllowedValueTypes>
     }
 
     render() {
-        const { children, className, ...others } = this.props;
+        const {
+            p, onResolve, onPending, onReject, children,
+            className, ...others
+        } = this.props;
+
         this.props2state();
 
         return <div className={`o2v-layout ${className || ''}`} {...others}>

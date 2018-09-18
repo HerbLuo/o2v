@@ -4,10 +4,22 @@ const fs = require('fs')
 const path = require('path')
 const { exec } = require('child_process')
 
+const runCmd = cmd => exec(cmd, (error, out, stdError) => {
+  if (error !== undefined) {
+    console.error(error)
+  }
+  if (out !== undefined) {
+    console.log(out)
+  }
+  if (stdError !== undefined) {
+    console.warn(stdError)
+  }
+})
+
 const dir = fs.readdirSync('src/components')
 fs.writeFileSync(path.resolve(__dirname, 'components.json'), JSON.stringify(dir))
 console.log('components.json deployed')
 
-exec('yarn dist:dev', (...args) => args.forEach(a => a && console.log(a)))
+runCmd('yarn dist:dev')
 
-exec('yarn test:manual:webpack', (...args) => args.forEach(a => a && console.log(a)))
+runCmd('yarn test:manual:webpack')
