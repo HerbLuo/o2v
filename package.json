@@ -8,13 +8,13 @@
   "files": [
     "lib",
     "src",
-    "index.ts"
+    "index.tsx"
   ],
   "scripts": {
     "dist": "SET NODE_ENV=production&& rollup -c ./rollup.config.js",
     "dist:dev": "rollup -w -c ./rollup.config.js",
     "test:manual": "node test/manual/index.node.js",
-    "test:manual:webpack": "webpack-dev-server --progress --open --config test/manual/test.webpack.babel.js",
+    "test:manual:webpack": "webpack-dev-server --progress --config test/manual/test.webpack.babel.js",
     "publish2npm": "npm run test && npm run dist && npm publish --access=public"
   },
   "keywords": [
@@ -32,6 +32,7 @@
     "@babel/register": "^7.0.0",
     "babel-eslint": "^9.0.0",
     "babel-loader": "^8.0.2",
+    "babel-plugin-styled-components": "^1.7.1",
     "css-loader": "^1.0.0",
     "eslint": "^5.5.0",
     "eslint-loader": "^2.1.0",
@@ -57,8 +58,10 @@
   "dependencies": {
     "@types/react": "^16.4.13",
     "@types/react-dom": "^16.0.7",
+    "@types/styled-components": "^3.0.1",
     "react": "^16.5.0",
     "react-dom": "^16.5.0",
+    "styled-components": "4.0.0-beta.7",
     "tslib": "^1.9.3"
   }
 }

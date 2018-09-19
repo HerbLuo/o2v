@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {isPromise} from "../../utils/utils";
-import './styles.less'
+import styled from 'styled-components'
 
 type AllowedValueTypes = any
 
@@ -77,10 +77,14 @@ export class PLayout<T extends AllowedValueTypes>
 
         this.props2state();
 
-        return <div className={`o2v-layout ${className || ''}`} {...others}>
+        return <O2vLayout {...others}>
             {this.asLayout()
                 ? this.props.children
                 : this.getContentByPromise()}
-        </div>
+        </O2vLayout>
     }
 }
+
+const O2vLayout = styled.div`
+  display: flex;
+`;

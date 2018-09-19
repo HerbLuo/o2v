@@ -4,10 +4,11 @@ import replace from 'rollup-plugin-replace'
 import rollupTypescript from 'rollup-plugin-typescript'
 import fse from 'fs-extra'
 
+fse.emptyDir('lib')
 fse.ensureDirSync('lib')
 
 export default {
-  input: 'index.ts',
+  input: 'index.tsx',
   output: [
     {
       format: 'cjs',
@@ -28,7 +29,8 @@ export default {
       typescript
     }),
     less({
-      output: 'lib/o2v.css'
+      output: 'lib/o2v.css',
+      insert: true
     }),
     replace({
       exclude: 'node_modules/**',
@@ -38,6 +40,7 @@ export default {
   external: [
     'react',
     'react-dom',
-    'tslib'
+    'tslib',
+    'styled-components'
   ]
 }

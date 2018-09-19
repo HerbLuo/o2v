@@ -4,17 +4,11 @@ const fs = require('fs')
 const path = require('path')
 const { exec } = require('child_process')
 
-const runCmd = cmd => exec(cmd, (error, out, stdError) => {
-  if (error !== undefined) {
-    console.error(error)
-  }
-  if (out !== undefined) {
-    console.log(out)
-  }
-  if (stdError !== undefined) {
-    console.warn(stdError)
-  }
-})
+const runCmd = cmd => {
+  const workerProcess = exec(cmd, {})
+  workerProcess.stdout.on('data', console.log)
+  workerProcess.stderr.on('data', console.error)
+}
 
 const dir = fs.readdirSync('src/components')
 fs.writeFileSync(path.resolve(__dirname, 'components.json'), JSON.stringify(dir))
