@@ -4,11 +4,11 @@ import replace from 'rollup-plugin-replace'
 import rollupTypescript from 'rollup-plugin-typescript'
 import fse from 'fs-extra'
 
-fse.emptyDir('lib')
+fse.emptyDirSync('lib')
 fse.ensureDirSync('lib')
 
 export default {
-  input: 'index.tsx',
+  input: 'index.ts',
   output: [
     {
       format: 'cjs',

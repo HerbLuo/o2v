@@ -1,4 +1,5 @@
 import './styles.less'
+import '@babel/polyfill'
 // import '@lib/o2v.css'
 import React from 'react'
 import ReactDom from 'react-dom'
@@ -58,3 +59,8 @@ ReactDom.render(
   <Content />,
   document.getElementById('content')
 )
+
+/* eslint-disable */
+if (module.hot) {
+  module.hot.accept()
+}
