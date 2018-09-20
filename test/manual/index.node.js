@@ -32,4 +32,3 @@ const runWebpack = (() => {
     areRunning = true
   }
 })()
-;console.log(runWebpack)

@@ -23,7 +23,7 @@ export default {
     }, {
       test: /.jsx?$/,
       use: ['babel-loader'],
-      exclude: /node_modules/
+      exclude: /node_modules|lib/
     }, {
       test: /.html$/,
       use: 'html-loader',

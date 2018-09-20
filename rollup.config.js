@@ -13,11 +13,13 @@ export default {
     {
       format: 'cjs',
       exports: 'named',
-      file: 'lib/index.js'
+      file: 'lib/index.js',
+      sourceMap: true
     },
     {
       format: 'es',
-      file: 'lib/index.esm.js'
+      file: 'lib/index.esm.js',
+      sourceMap: true
     },
   ],
   watch: {
