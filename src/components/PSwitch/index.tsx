@@ -1,6 +1,6 @@
 import * as React from 'react'
 import styled from 'styled-components'
-import {boxFix} from "../common/styles";
+import {boxFix, getStyleValue, StyleValue} from "../common/styles";
 
 export interface PSwitchProps {
 
@@ -12,7 +12,7 @@ interface State {
 
 export class PSwitch extends React.Component<PSwitchProps, State> {
     render () {
-        return <SwitchSpan className="dev">
+        return <SwitchSpan className="dev" style={{width: '48px', height: '48px'}}>
             <input type="checkbox" />
         </SwitchSpan>
     }
@@ -28,28 +28,28 @@ const SwitchSpan = styled.span`
   justify-content: center;
   align-items: center;
   
-  width: 48px;
-  height: 48px;
+  width: ${getStyleValue('width')};
+  height: ${getStyleValue('height')};
   
   &::before {
     content: '';
     position: absolute;
     background-color: rgb(225, 0, 80);
     opacity: 0.5;
-    height: 14px;
-    width: 34px;
-    border-radius: 7px;
+    height: ${new StyleValue('width').scale(14 / 48).value()};
+    width: ${new StyleValue('width').scale(34 / 48).value()};
+    border-radius: ${new StyleValue('width').scale(7 / 48).value()};
     text-shadow: none;
   }
   
   &::after {
     content: '';
     position: absolute;
-    width: 20px;
-    height: 20px;
+    width: ${new StyleValue('width').scale(20 / 48).value()};
+    height: ${new StyleValue('width').scale(20 / 48).value()};
+    right: ${new StyleValue('width').scale(4 / 48).value()};
     border-radius: 50%;
     background-color: rgb(255, 0, 80);
-    right: 0;
   }
   
   input[type=checkbox] {
