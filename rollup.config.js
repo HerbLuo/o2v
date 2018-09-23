@@ -1,8 +1,8 @@
 import typescript from 'typescript'
-import less from 'rollup-plugin-less'
 import replace from 'rollup-plugin-replace'
 import rollupTypescript from 'rollup-plugin-typescript'
 import fse from 'fs-extra'
+import commonjs from 'rollup-plugin-commonjs';
 
 fse.emptyDirSync('lib')
 fse.ensureDirSync('lib')
@@ -30,10 +30,7 @@ export default {
     rollupTypescript({
       typescript
     }),
-    less({
-      output: 'lib/o2v.css',
-      insert: true
-    }),
+    commonjs(),
     replace({
       exclude: 'node_modules/**',
       ['process.env.NODE_ENV']: JSON.stringify(process.env.NODE_ENV || 'development')
@@ -43,6 +40,7 @@ export default {
     'react',
     'react-dom',
     'tslib',
-    'styled-components'
+    'styled-components',
+    'color'
   ]
 }
