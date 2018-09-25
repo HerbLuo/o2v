@@ -2,26 +2,27 @@ import * as React from 'react'
 import styled from 'styled-components'
 import {boxFix} from "../common/styles";
 import {getStyleValue, StyleValue} from "../../utils/StyleTransform";
-import {CSSProperties} from "react";
+import {SwitchBaseProps, SwitchCommon} from "../common/SwitchCommon";
 
-export interface PSwitchProps {
-
+export interface PSwitchProps extends SwitchBaseProps {
 }
 
-interface State {
-
-}
-
-export class PSwitch extends React.Component<PSwitchProps, State> {
+export class PSwitch extends React.Component<PSwitchProps> {
     render () {
-        return <SwitchSpan
-            className="dev"
-            style={PSwitch.defaultStyle}>
-            <input type="checkbox" />
-        </SwitchSpan>
+        return <SwitchCommon {...this.props}>{it =>
+            <SwitchSpan
+                className={it.state.checked ? 'on' : 'off'}
+                style={PSwitch.defaultStyle}>
+                <input
+                    type="checkbox"
+                    checked={it.state.checked}
+                    onChange={it.onChange}
+                />
+            </SwitchSpan>
+        }</SwitchCommon>
     }
 
-    static defaultStyle: CSSProperties = {
+    static defaultStyle: React.CSSProperties = {
         width: '48px',
         height: '48px',
         color: 'rgb(255, 0, 80)'
@@ -62,6 +63,20 @@ const SwitchSpan = styled.span`
         right: ${new StyleValue('width').scale(4 / 48).value()};
         border-radius: 50%;
         background-color: ${new StyleValue('color').value()};
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2),
+        0 1px 1px 0 rgba(0, 0, 0, 0.14), 
+        0 2px 1px -1px rgba(0, 0, 0, 0.12);
+    }
+    
+    &.off{
+        &::before {
+            background-color: #000;
+            opacity: 0.38;
+        }
+        &::after {
+            background-color: white;
+            right: ${new StyleValue('width').scale(24 / 48).value()}
+        }
     }
 
     input[type=checkbox] {

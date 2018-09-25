@@ -6,6 +6,7 @@
     "lib": ["esnext"],
     "strict": true,
     "jsx": "react",
+    "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true
   },
