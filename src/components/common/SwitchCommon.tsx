@@ -12,32 +12,34 @@ interface SwitchCommonProps extends SwitchBaseProps {
 }
 
 interface SwitchCommonState {
-    checked: boolean
+    checked: boolean;
+    oldPropsChecked: boolean | null;
 }
+const defaultState: SwitchCommonState = {
+    checked: false,
+    oldPropsChecked: null
+};
 
 export class SwitchCommon extends React.Component<SwitchCommonProps, SwitchCommonState> {
-    state = {
-        checked: false
-    };
+    state = defaultState;
 
     private setChecked = (checked: boolean) => this.setState({checked});
     turnOn = this.setChecked.bind(this, true);
     turnOff = this.setChecked.bind(this, false);
 
-    // static getDerivedStateFromProps(nextProps: SwitchCommonProps, prevState: SwitchCommonState) {
-    //     console.log(nextProps);
-    //     console.log(prevState);
-    //     if (nextProps.checked !== prevState.checked) {
-    //         return {
-    //             checked: nextProps.checked
-    //         }
-    //     }
-    //     return null
-    // }
+    static getDerivedStateFromProps(
+        nextProps: SwitchCommonProps, prevState: SwitchCommonState): SwitchCommonState | null {
+        if (nextProps.checked === prevState.oldPropsChecked) {
+            return null
+        }
+        return {
+            checked: nextProps.checked,
+            oldPropsChecked: nextProps.checked
+        }
+    }
 
     onChange = (e: React.SyntheticEvent<React.InputHTMLAttributes<any>>) => {
         const checked = e.currentTarget.checked;
-        console.log(checked);
 
         if (checked) {
             this.turnOn()
