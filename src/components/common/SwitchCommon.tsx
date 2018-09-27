@@ -20,20 +20,24 @@ export class SwitchCommon extends React.Component<SwitchCommonProps, SwitchCommo
         checked: false
     };
 
-    turnOn = () => {
-        this.setState({
-            checked: true
-        })
-    };
+    private setChecked = (checked: boolean) => this.setState({checked});
+    turnOn = this.setChecked.bind(this, true);
+    turnOff = this.setChecked.bind(this, false);
 
-    turnOff = () => {
-        this.setState({
-            checked: false
-        })
-    };
+    // static getDerivedStateFromProps(nextProps: SwitchCommonProps, prevState: SwitchCommonState) {
+    //     console.log(nextProps);
+    //     console.log(prevState);
+    //     if (nextProps.checked !== prevState.checked) {
+    //         return {
+    //             checked: nextProps.checked
+    //         }
+    //     }
+    //     return null
+    // }
 
     onChange = (e: React.SyntheticEvent<React.InputHTMLAttributes<any>>) => {
         const checked = e.currentTarget.checked;
+        console.log(checked);
 
         if (checked) {
             this.turnOn()
