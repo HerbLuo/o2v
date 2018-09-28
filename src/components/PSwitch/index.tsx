@@ -9,17 +9,19 @@ export interface PSwitchProps extends SwitchBaseProps {
 
 export class PSwitch extends React.Component<PSwitchProps> {
     render () {
-        return <SwitchCommon {...this.props}>{it =>
-            <SwitchSpan
-                className={it.state.checked ? 'on' : 'off'}
-                style={PSwitch.defaultStyle}>
-                <input
-                    type="checkbox"
-                    checked={it.state.checked}
-                    onChange={it.onChange}
-                />
-            </SwitchSpan>
-        }</SwitchCommon>
+        return <SwitchCommon {...this.props}>
+            {it =>
+                <SwitchSpan
+                    className={it.state.checked ? 'on' : 'off'}
+                    style={PSwitch.defaultStyle}>
+                    <input
+                        type="checkbox"
+                        checked={it.state.checked}
+                        onChange={it.onChange}
+                    />
+                </SwitchSpan>
+            }
+        </SwitchCommon>
     }
 
     static defaultStyle: React.CSSProperties = {
@@ -53,6 +55,8 @@ const SwitchSpan = styled.span`
         background-color: ${new StyleValue('color')
             .asColor(color => color.lighten(0.4)).value()
         };
+        transition: opacity 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+        background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     }
 
     &::after {
@@ -60,12 +64,14 @@ const SwitchSpan = styled.span`
         position: absolute;
         width: ${new StyleValue('width').scale(20 / 48).value()};
         height: ${new StyleValue('width').scale(20 / 48).value()};
-        right: ${new StyleValue('width').scale(4 / 48).value()};
+        left: ${new StyleValue('width').scale(7 / 48).value()};
         border-radius: 50%;
+        transform: translateX(14px);
         background-color: ${new StyleValue('color').value()};
         box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2),
         0 1px 1px 0 rgba(0, 0, 0, 0.14), 
         0 2px 1px -1px rgba(0, 0, 0, 0.12);
+        transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     }
     
     &.off{
@@ -75,7 +81,7 @@ const SwitchSpan = styled.span`
         }
         &::after {
             background-color: white;
-            right: ${new StyleValue('width').scale(24 / 48).value()}
+            transform: none;
         }
     }
 
