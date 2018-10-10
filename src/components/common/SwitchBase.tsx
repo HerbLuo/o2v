@@ -8,7 +8,7 @@ export interface SwitchBaseProps {
 }
 
 interface SwitchCommonProps extends SwitchBaseProps {
-    children: (sc: SwitchCommon) => React.ReactElement<SwitchBaseProps>
+    children: (sc: SwitchBase) => React.ReactElement<SwitchBaseProps>
 }
 
 interface SwitchCommonState {
@@ -20,7 +20,7 @@ const defaultState: SwitchCommonState = {
     oldPropsChecked: null
 };
 
-export class SwitchCommon extends React.Component<SwitchCommonProps, SwitchCommonState> {
+export class SwitchBase extends React.Component<SwitchCommonProps, SwitchCommonState> {
     state = defaultState;
 
     private setChecked = (checked: boolean) => this.setState({checked});

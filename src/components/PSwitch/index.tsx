@@ -1,15 +1,15 @@
 import * as React from 'react'
 import styled from 'styled-components'
-import {boxFix} from "../common/styles";
-import {getStyleValue, StyleValue} from "../../utils/StyleTransform";
-import {SwitchBaseProps, SwitchCommon} from "../common/SwitchCommon";
+import { boxFix } from "../common/styles";
+import { getStyleValue, StyleValue } from "../../utils/StyleTransform";
+import { SwitchBaseProps, SwitchBase } from "../common/SwitchBase";
 
 export interface PSwitchProps extends SwitchBaseProps {
 }
 
 export class PSwitch extends React.Component<PSwitchProps> {
-    render () {
-        return <SwitchCommon {...this.props}>
+    render() {
+        return <SwitchBase {...this.props}>
             {it =>
                 <SwitchSpan
                     className={it.state.checked ? 'on' : 'off'}
@@ -21,7 +21,7 @@ export class PSwitch extends React.Component<PSwitchProps> {
                     />
                 </SwitchSpan>
             }
-        </SwitchCommon>
+        </SwitchBase>
     }
 
     static defaultStyle: React.CSSProperties = {
@@ -53,8 +53,8 @@ const SwitchSpan = styled.span`
         border-radius: ${new StyleValue('width').scale(7 / 48).value()};
         text-shadow: none;
         background-color: ${new StyleValue('color')
-            .asColor(color => color.lighten(0.4)).value()
-        };
+    .asColor(color => color.lighten(0.4)).value()
+    };
         transition: opacity 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
         background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     }

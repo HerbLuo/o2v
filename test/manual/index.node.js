@@ -12,6 +12,7 @@ const runCmd = cmd => {
 }
 
 const dir = fs.readdirSync('src/components')
+  .filter(name => !['common'].includes(name))
 fs.writeFileSync(path.resolve(__dirname, 'components.json'), JSON.stringify(dir))
 console.log('components.json deployed')
 
